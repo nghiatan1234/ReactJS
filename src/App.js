@@ -87,7 +87,7 @@ function App() {
         }
       </header>
     </div> */}
-      <Content>
+      <Content data={products}>
         {
           products.map(p => {
             return <ProductItem {...p}/>
