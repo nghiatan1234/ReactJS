@@ -1,16 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Layout from './components/Layout'
+import SideBar from './components/Sidebar'
+import Content from './components/Content'
+import ProductItem from './components/ProductItem'
 
+
+const products = [
+  {
+    name: 'SamSung Galaxy Note 10 Lite',
+    type: 'SamSung',
+    imageURL: 'https://cdn.fptshop.com.vn/Uploads/Thumbs/2020/1/17/637148518773647407_SS-note10-lite-bac-dd.png',
+    price: '9.990.000',
+    discountPrice: '13.990.000'
+  },
+  {
+    name: 'iPhone XR 64GB',
+    type: 'iPhone',
+    imageURL: 'https://cdn.fptshop.com.vn/Uploads/Thumbs/2018/10/12/636749593269651993_iphoneXR-1o.png',
+    price: '15.490.000',
+    discountPrice: '16.990.000'
+  },
+  {
+    name: 'Oppo A9 2020',
+    type: 'Oppo',
+    imageURL: 'https://cdn.fptshop.com.vn/Uploads/Thumbs/2020/2/28/637185093475802657_oppo-a9-dd.png',
+    price: '5.990.000',
+    discountPrice: '3.990.000'
+  }
+]
 
 function Image(props) {
   return (
     <div>
       <div style={{ backgroundColor: 'red', width: '40%' }}>SALE </div>
       <div style={{ marginTop: '20px' }}>
-        <img src={props.imageURL}/>
+        <img src={props.imageURL} />
       </div>
-      
+
     </div>
   )
 }
@@ -18,8 +46,8 @@ function Image(props) {
 function Header(props) {
   return (
     <div >
-      <p style={{ color: 'red'}}>{props.title}</p>
-      <h3>{props.detail}</h3>
+      <p style={{ color: 'red' }}>{props.name}</p>
+      <h3>{props.type}</h3>
     </div>
   )
 }
@@ -29,34 +57,46 @@ function Header(props) {
 function Price(props) {
   return (
     <div>
-      <span> {props.basePrice} </span>
+      <span> {props.price} </span>
       <span style={{ textDecoration: 'line-through' }}>{props.discountPrice}</span>
     </div>
   )
 }
 
+// function ProductItem(props) {
+//   return (
+//     <div style={{ display: 'flex' }}>
+//       <Image imageURL={props.data.imageURL} />
+//       <Header name={props.data.name} type={props.data.type} />
+//       <Price price={props.data.price} discountPrice={props.data.discountPrice} />
+//     </div>
+//   )
+// }
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Image imageURL="https://media3.scdn.vn/img4/2020/03_18/fx0jRvqJ7wVYmcj9swIb_simg_b5529c_250x250_maxb.jpg"/>
-        <Header title="FURNITURE" detail="Minimal Deco Furniture"/>
-        <Price basePrice="$119.000 USD" discountPrice="$230.0000 USD"/>
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello <code>World!</code>
-        </p> */}
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
+    <Layout>
+    
+      {/* <div className="App">
+      <header className="products">
+        {
+          products.map(item => {
+            return <ProductItem data={item}/>
+          })
+        }
       </header>
-    </div>
+    </div> */}
+      <Content>
+        {
+          products.map(p => {
+            return <ProductItem {...p}/>
+          })
+        }
+      </Content>
+      <SideBar />
+    </Layout>
+
   );
 }
 
