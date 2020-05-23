@@ -6,15 +6,19 @@ import './App.css';
 function Image(props) {
   return (
     <div>
-      <img src={props.imageURL}/>
+      <div style={{ backgroundColor: 'red', width: '40%' }}>SALE </div>
+      <div style={{ marginTop: '20px' }}>
+        <img src={props.imageURL}/>
+      </div>
+      
     </div>
   )
 }
 
 function Header(props) {
   return (
-    <div>
-      <p>{props.title}</p>
+    <div >
+      <p style={{ color: 'red'}}>{props.title}</p>
       <h3>{props.detail}</h3>
     </div>
   )
