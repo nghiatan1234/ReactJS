@@ -1,17 +1,36 @@
-import React from "react"
+import React, {useState} from "react"
 
-function SideBar(){
-    return(
-        <div className="col-xl-3 col-lg-4">
-        <div className="sidebar-shop">
-          <div className="shop-widget">
-            <h3 className="shop-title">Search by</h3>
-            <form action="#" className="shop-search">
-              <input type="text" placeholder="Your keyword...." />
-              <button><i className="fa fa-search" /></button>
-            </form>
-          </div>
-          {/* 
+function SideBar(props) {
+
+  const [nameValue, setName] = useState([]);
+  const onSortAsc = () => {
+    props.onSortAsc(props);
+  }
+
+  const onSortDesc = () => {
+    props.onSortDesc(props);
+  }
+
+  const onInputChange = (event) => {
+    setName(event.target.value);
+  }
+
+  const onSearchProduct = (e) => {
+    e.preventDefault();
+  }
+
+  return (
+    
+    <div className="col-xl-3 col-lg-4">
+      <div className="sidebar-shop">
+        <div className="shop-widget">
+          <h3 className="shop-title">Search by</h3>
+          <form onSubmit={onSearchProduct}  className="shop-search">
+            <input type="text" placeholder="Your keyword...." onChange={onInputChange} />
+            <button ><i className="fa fa-search" /></button>
+          </form>
+        </div>
+        {/* 
                             <div class="shop-widget">
                                 <h3 class="shop-title">Filter selection</h3>
                                 <div class="price-filter">
@@ -19,83 +38,83 @@ function SideBar(){
                                     <input type="text" id="amount">
                                 </div>
                             </div> */}
-          <div className="shop-widget">
-            <h3 className="shop-title">SHOP BY</h3>
-            <ul className="shop-link">
-              <li><a href="#">Name: A-Z</a></li>
-              <li><a href="#">Name: Z-A</a></li>
-              <li><a href="#">Price: High to Low</a></li>
-              <li><a href="#">Price: Low to High</a></li>
-              <li><a href="#">Product: Top Sales</a></li>
-            </ul>
-          </div>
-          <div className="shop-widget">
-            <h3 className="shop-title">Recent Product</h3>
-            <ul className="shop-sidebar-product">
-              <li>
-                <div className="side-pro-img">
-                  <a href="#"><img src="./assets/shop-rsp3.jpg" alt="" /></a>
+        <div className="shop-widget">
+          <h3 className="shop-title">SHOP BY</h3>
+          <ul className="shop-link">
+            <li><a style={{ cursor: 'pointer' }} onClick={onSortAsc}>Name: A-Z</a></li>
+            <li><a style={{ cursor: 'pointer' }} onClick={onSortDesc}>Name: Z-A</a></li>
+            <li><a href="#">Price: High to Low</a></li>
+            <li><a href="#">Price: Low to High</a></li>
+            <li><a href="#">Product: Top Sales</a></li>
+          </ul>
+        </div>
+        <div className="shop-widget">
+          <h3 className="shop-title">Recent Product</h3>
+          <ul className="shop-sidebar-product">
+            <li>
+              <div className="side-pro-img">
+                <a href="#"><img src="./assets/shop-rsp3.jpg" alt="" /></a>
+              </div>
+              <div className="side-pro-content">
+                <div className="side-pro-rating">
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
                 </div>
-                <div className="side-pro-content">
-                  <div className="side-pro-rating">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                  <h5><a href="#">Raglan Baseball-Style</a></h5>
-                  <div className="side-pro-price">
-                    <span>$119.00 USD</span>
-                  </div>
+                <h5><a href="#">Raglan Baseball-Style</a></h5>
+                <div className="side-pro-price">
+                  <span>$119.00 USD</span>
                 </div>
-              </li>
-              <li>
-                <div className="side-pro-img">
-                  <a href="#"><img src="./assets/shop-rsp2.jpg" alt="" /></a>
+              </div>
+            </li>
+            <li>
+              <div className="side-pro-img">
+                <a href="#"><img src="./assets/shop-rsp2.jpg" alt="" /></a>
+              </div>
+              <div className="side-pro-content">
+                <div className="side-pro-rating">
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
                 </div>
-                <div className="side-pro-content">
-                  <div className="side-pro-rating">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                  <h5><a href="#">Raglan Baseball-Style</a></h5>
-                  <div className="side-pro-price">
-                    <span>$119.00 USD</span>
-                  </div>
+                <h5><a href="#">Raglan Baseball-Style</a></h5>
+                <div className="side-pro-price">
+                  <span>$119.00 USD</span>
                 </div>
-              </li>
-              <li>
-                <div className="side-pro-img">
-                  <a href="#"><img src="./assets/shop-rsp4.jpg" alt="" /></a>
+              </div>
+            </li>
+            <li>
+              <div className="side-pro-img">
+                <a href="#"><img src="./assets/shop-rsp4.jpg" alt="" /></a>
+              </div>
+              <div className="side-pro-content">
+                <div className="side-pro-rating">
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
+                  <i className="fas fa-star" />
                 </div>
-                <div className="side-pro-content">
-                  <div className="side-pro-rating">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                  <h5><a href="#">Raglan Baseball-Style</a></h5>
-                  <div className="side-pro-price">
-                    <span>$119.00 USD</span>
-                  </div>
+                <h5><a href="#">Raglan Baseball-Style</a></h5>
+                <div className="side-pro-price">
+                  <span>$119.00 USD</span>
                 </div>
-              </li>
-            </ul>
-          </div>
-          <div className="shop-widget">
-            <div className="shop-sidebar-banner">
-              <a href="#"><img src="./assets/shop-banner.jpg" alt="" /></a>
-            </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className="shop-widget">
+          <div className="shop-sidebar-banner">
+            <a href="#"><img src="./assets/shop-banner.jpg" alt="" /></a>
           </div>
         </div>
       </div>
-    )
+    </div>
+  )
 }
 
 
