@@ -1,8 +1,8 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
 function SideBar(props) {
 
-  const [nameValue, setName] = useState([]);
+  const [keyword, setKeyword] = useState();
   const onSortAsc = () => {
     props.onSortAsc(props);
   }
@@ -11,22 +11,23 @@ function SideBar(props) {
     props.onSortDesc(props);
   }
 
-  const onInputChange = (event) => {
-    setName(event.target.value);
+  const onChangeKeyword = (event) => {
+    setKeyword(event.target.value);
   }
 
   const onSearchProduct = (e) => {
     e.preventDefault();
+    props.onSearchProduct(keyword);
   }
 
   return (
-    
+
     <div className="col-xl-3 col-lg-4">
       <div className="sidebar-shop">
         <div className="shop-widget">
           <h3 className="shop-title">Search by</h3>
-          <form onSubmit={onSearchProduct}  className="shop-search">
-            <input type="text" placeholder="Your keyword...." onChange={onInputChange} />
+          <form onSubmit={onSearchProduct} className="shop-search">
+            <input type="text" placeholder="Your keyword...." onChange={onChangeKeyword} />
             <button ><i className="fa fa-search" /></button>
           </form>
         </div>

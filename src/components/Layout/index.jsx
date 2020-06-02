@@ -1,5 +1,6 @@
 import React from 'react'
 import Cart from '../Cart'
+import { Link } from 'react-router-dom'
 
 function Layout(props) {
   return (
@@ -10,7 +11,7 @@ function Layout(props) {
             <div className="row align-items-center">
               <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                 <div className="logo">
-                  <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
+                  <Link to="/"><img src="./assets/logo_shop.png" alt="" /></Link>
                 </div>
                 <div className="category-menu">
                   <h4>Category</h4>
@@ -57,9 +58,11 @@ function Layout(props) {
                 <div className="header-right f-right">
                   <ul>
                     <li className="search-btn">
-                      <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search" /></a>
+                      <Link to="/" className="search-btn nav-search search-trigger"><i className="fas fa-search" /></Link>
                     </li>
-                    <li className="login-btn"><a href="#"><i className="far fa-user" /></a></li>
+                    <li className="login-btn">
+                      <Link to={`/login`}><i className="far fa-user" /></Link>
+                    </li>
                     <Cart data={props.productsInCart} />
                   </ul>
                 </div>

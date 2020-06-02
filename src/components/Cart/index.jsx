@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function Cart(props) {
 
-
     return (
         <li className="d-shop-cart">
             <a href="#">
@@ -23,11 +22,13 @@ function Cart(props) {
                                     <a href="#">{elm.name}</a>
                                 </h3>
                                 <div className="cart-price">
-                                    <span className="new">$ {elm.priceMax}</span>
+                                    <span className="new">{elm.priceMax}</span>
                                     <span>
-                                        <del>${elm.price}</del>
+                                        {elm.quantity} x
+                                        {elm.price}
                                     </span>
                                 </div>
+                                
                             </div>
                             <div className="del-icon">
                                 <a onClick={() => props.onRemoveCart(elm.id)}>
@@ -43,7 +44,7 @@ function Cart(props) {
                         <span className="f-left">Total:</span>
                         <span className="f-right">{
                             props.data.reduce((totalPrice, product) => {
-                                return totalPrice  += product.price * product.quantity
+                                return totalPrice += product.price * product.quantity
                             }, 0)
                         }</span>
                     </div>

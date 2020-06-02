@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-
+import { Link } from 'react-router-dom'
 
 function Login() {
 
@@ -40,7 +40,8 @@ function Login() {
                                 <div className="breadcrumb-text text-center">
                                     <h1>Login</h1>
                                     <ul className="breadcrumb-menu">
-                                        <li><a href="index.html">home</a></li>
+                                        <li>
+                                            <Link to="/">home</Link></li>
                                         <li><span>Login</span></li>
                                     </ul>
                                 </div>
@@ -72,7 +73,9 @@ function Login() {
                                         </div>
                                         <button className="btn theme-btn-2 w-100">Login Now</button>
                                         <div className="or-divide"><span>or</span></div>
-                                        <button className="btn theme-btn w-100">Register Now</button>
+                                        <Link className="btn theme-btn w-100" to="/register">
+                                           Register Now
+                                        </Link>
                                     </form>
                                 </div>
                             </div>
