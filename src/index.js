@@ -2,43 +2,64 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Main from './pages/Main';
-import Register from './pages/Register'
-import Login from './pages/Login'
-import ProductDetail from './pages/ProductDetail';
+// import Main from './pages/Main';
+// import Register from './pages/Register'
+// import Login from './pages/Login'
+// import ProductDetail from './pages/ProductDetail';
 import * as serviceWorker from './serviceWorker';
 import { ThemeContextCustom } from './hooks/useBgMode';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import productData from './product.json';
+import Loading from './components/Loading';
 
+const Main = React.lazy(() => import('./pages/Main'));
+const Login = React.lazy(() => import('./pages/Login'));
+const Register = React.lazy(() => import('./pages/Register'));
+const ProductDetail = React.lazy(() => import('./pages/ProductDetail'));
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <ThemeContextCustom value="light">
-        <Switch>
+      <React.Suspense fallback={<Loading />}>
+        <ThemeContextCustom value="light">
+          <Switch>
 
-          <Route exact path="/">
-            <Main />
-          </Route>
+            <Route exact path="/">
+              <Main />
+            </Route>
 
-          <Route exact path="/(login|dang-nhap)">
-            <Login />
-          </Route>
+            <Route exact path="/(login|dang-nhap)">
+              <Login />
+            </Route>
 
-          <Route exact path="/register">
-            <Register />
-          </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
 
-          <Route exact path="/product-detail">
-            <ProductDetail />
-          </Route>
+            <Route exact path="/product-detail/:id">
+              <ProductDetail />
+            </Route>
 
-          <Route path="*">
-            <h1>404</h1>
-          </Route>
+            {/* <Route 
+            exact
+            path="/product-detail/:id"
+            render={(props) => {
+              const product = productData.data.find(elm => elm.id == props.match.params.id);
+              if (!product) {
+                return <h1>404 Khong tim thay san pham</h1>
+              }
+              return <ProductDetail name={product.name}/>
+            }}
+          /> */}
 
-        </Switch>
-      </ThemeContextCustom>
+            {/* <Route path="*">
+              <h1>404</h1>
+            </Route> */}
+
+          </Switch>
+        </ThemeContextCustom>
+      </React.Suspense>
+
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

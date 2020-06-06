@@ -1,34 +1,49 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios';
 
 function Login() {
-
     const [userInfo, setUserInfo] = useState({
-        userName: "",
+        email: "",
         password: ""
     });
 
-    const onChangeName = (event) => {
-        setUserInfo(
-            {
-                ...userInfo,
-                userName: event.target.value
-            }
-        )
+    const history = useHistory();
+
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+        console.log(userInfo, "userInfo")
+        doLogin(userInfo);
     }
 
-    const onChangePassword = (event) => {
+    const onChange = (e) => {
         setUserInfo({
             ...userInfo,
-            password: event.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log(userInfo);
+    const doLogin = async (data) => {
+        setErrorMessage('')
+        try {
+            const result = await axios({
+                method: "POST",
+                url: "https://min-shop.herokuapp.com/rest/user/signIn",
+                data
+            });
+            
+            localStorage.setItem("token", result.data.accessToken);
+            history.push('/')
+
+        } catch (error) {
+            setErrorMessage(error.response.data.message);
+
+        }
     }
+
     return (
         <Layout productsInCart={[]}>
             <main>
@@ -40,8 +55,7 @@ function Login() {
                                 <div className="breadcrumb-text text-center">
                                     <h1>Login</h1>
                                     <ul className="breadcrumb-menu">
-                                        <li>
-                                            <Link to="/">home</Link></li>
+                                        <li><a href="index.html">home</a></li>
                                         <li><span>Login</span></li>
                                     </ul>
                                 </div>
@@ -57,11 +71,12 @@ function Login() {
                             <div className="col-lg-8 offset-lg-2">
                                 <div className="basic-login">
                                     <h3 className="text-center mb-60">Login From Here</h3>
+                                    <p className="text-danger">{errorMessage}</p>
                                     <form onSubmit={onSubmit}>
                                         <label htmlFor="name">Email Address <span>**</span></label>
-                                        <input id="name" type="text" placeholder="Enter Username or Email address..." onChange={onChangeName} />
+                                        <input name="email" id="name" type="text" placeholder="Enter Username or Email address..." onChange={onChange} />
                                         <label htmlFor="pass">Password <span>**</span></label>
-                                        <input id="pass" type="password" placeholder="Enter password..." onChange={onChangePassword} />
+                                        <input name="password" id="pass" type="password" placeholder="Enter password..." onChange={onChange} />
                                         <div className="login-action mb-20 fix">
                                             <span className="log-rem f-left">
                                                 <input id="remember" type="checkbox" />
@@ -71,11 +86,9 @@ function Login() {
                                                 <a href="#">Lost your password?</a>
                                             </span>
                                         </div>
-                                        <button className="btn theme-btn-2 w-100">Login Now</button>
+                                        <button type="submit" className="btn theme-btn-2 w-100">Login Now</button>
                                         <div className="or-divide"><span>or</span></div>
-                                        <Link className="btn theme-btn w-100" to="/register">
-                                           Register Now
-                                        </Link>
+                                        <Link to="/register" className="btn theme-btn w-100">Register Now</Link>
                                     </form>
                                 </div>
                             </div>

@@ -11,7 +11,7 @@ function Layout(props) {
             <div className="row align-items-center">
               <div className="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-5 d-flex align-items-center pos-relative">
                 <div className="logo">
-                  <Link to="/"><img src="./assets/logo_shop.png" alt="" /></Link>
+                  <Link to="/"><img src="/assets/logo_shop.png" alt="" /></Link>
                 </div>
                 <div className="category-menu">
                   <h4>Category</h4>
@@ -31,7 +31,7 @@ function Layout(props) {
                   <nav id="mobile-menu" style={{display: 'block'}}>
                     <ul>
                       <li>
-                        <a href="./index.html">Home</a>
+                        <Link to="/">Home</Link>
                       </li>
                       <li>
                         <a href="#">Pages</a>
@@ -84,7 +84,7 @@ function Layout(props) {
               <div className="col-xl-5 col-lg-6 col-md-6 ">
                 <div className="footer-widget mb-40 pr-70">
                   <div className="footer-logo">
-                    <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
+                    <a href="#"><img src="/assets/logo_shop.png" alt="" /></a>
                   </div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                     ut labore et dolore mag na

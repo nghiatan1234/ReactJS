@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 function Register() {
@@ -25,7 +26,23 @@ function Register() {
 
     const onRegisterClick = (e) => {
         e.preventDefault();
-        console.log(userRegister);
+        doRegister(userRegister);
+    }
+
+    const doRegister = async (data) => {
+        try {
+            const result = await axios({
+                method: "POST",
+                url: "https://min-shop.herokuapp.com/rest/user/signUp",
+                data
+            });
+            
+            console.log(result.data);
+            
+        } catch (error) {
+            console.log(error.message);
+        }
+
     }
 
     return (
