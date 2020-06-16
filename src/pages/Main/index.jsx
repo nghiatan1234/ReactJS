@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Main.css";
 import Layout from "../../components/Layout";
 import Content from "../../components/Content";
@@ -6,12 +6,35 @@ import ProductItem from "../../components/ProductItem";
 import SideBar from "../../components/Sidebar";
 import dataProduct from '../../product.json';
 import { useBgMode } from "../../hooks/useBgMode";
+import axios from "axios";
+import store from "../../store";
+import { getProductAction } from './Main.action';
+import { connect } from 'react-redux';
 
-function Main() {
+function Main(props) {
   const [productsInCart, setProductsInCart] = useState([]);
-  const [products, setProducts] = useState(dataProduct.data);
+  const [products, setProducts] = useState([]);
   const [value, setValue] = useBgMode();
 
+  // const { getProducts } = props;
+
+
+  // store.subscribe(() => {
+  //   const stateFromStore = store.getState()
+  //   if (stateFromStore.productsReducer.products) {
+  //     setProducts(stateFromStore.productsReducer.products)
+  //   }
+  // })
+
+  useEffect(() => {
+    if(props.productsListA) {
+      setProducts(props.productsListA)
+    }
+  }, [props.productsListA])
+
+  useEffect(() => {
+    getProductAction()
+  }, [getProductAction])
 
   const addProductsInCart = (newProduct) => {
     let productCart = {
@@ -88,4 +111,17 @@ function Main() {
   );
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    productsListA: state.productsReducer.products,
+    loading: state.productsReducer.loading
+  }
+}
+
+
+// const mapDispatchToProps = {
+//   getProducts: getProductAction
+// }
+
+
+export default connect(mapStateToProps)(Main);

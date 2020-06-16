@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../components/Layout";
-import { withRouter, useParams } from "react-router-dom"; // dung higher component
+import { withRouter, useParams, Link } from "react-router-dom"; // dung higher component
 import productData from '../../product.json';
+import { connect } from "react-redux";
+import { productDetailAction } from "./ProductDetail.action";
+
 
 
 function ProductDetail(props) {
-    const params = useParams();
-    const product = productData.data.find(elm => String(elm.id) === params.id)
-    console.log(product, "product")
+
+    const params = useParams(); 
+
+    useEffect(() => {
+        const id = params.id;
+        props.getProducDetail(id);
+    }, []);
+
+    const product = props.productDetail;
     if (!product) {
-        return <h1>404 ko tim thay san pham</h1>
+        return <div>loading</div>;
     }
 
     return (
@@ -27,7 +36,7 @@ function ProductDetail(props) {
                                     <h1>Our Shop</h1>
                                     <ul className="breadcrumb-menu">
                                         <li>
-                                            <a href="index.html">home</a>
+                                            <Link to="/">home</Link>
                                         </li>
                                         <li>
                                             <span>shop details</span>
@@ -650,4 +659,12 @@ function ProductDetail(props) {
     );
 }
 
-export default ProductDetail;
+const mapStateToProps = (state) => {
+    return {
+        productDetail: state.productDetailReducer.data,
+    };
+};
+const mapDispatchToProps = {
+    getProducDetail: productDetailAction,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
