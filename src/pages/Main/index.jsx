@@ -6,8 +6,6 @@ import ProductItem from "../../components/ProductItem";
 import SideBar from "../../components/Sidebar";
 import dataProduct from '../../product.json';
 import { useBgMode } from "../../hooks/useBgMode";
-import axios from "axios";
-import store from "../../store";
 import { getProductAction } from './Main.action';
 import { connect } from 'react-redux';
 
@@ -15,16 +13,6 @@ function Main(props) {
   const [productsInCart, setProductsInCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [value, setValue] = useBgMode();
-
-  // const { getProducts } = props;
-
-
-  // store.subscribe(() => {
-  //   const stateFromStore = store.getState()
-  //   if (stateFromStore.productsReducer.products) {
-  //     setProducts(stateFromStore.productsReducer.products)
-  //   }
-  // })
 
   useEffect(() => {
     if(props.productsListA) {

@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import { registerAccountAction } from './Register.action';
+import { connect } from "react-redux";
 
-
-function Register() {
+function Register(props) {
 
     const [userRegister, setRegisterInfo] = useState({
         userName: "",
         email: "",
         password: "",
     });
+
+    const history = useHistory();
 
     const onChangeUsername = (e) => {
         setRegisterInfo({ ...userRegister, username: e.target.value });
@@ -29,15 +31,10 @@ function Register() {
         doRegister(userRegister);
     }
 
-    const doRegister = async (data) => {
+    const doRegister = async (e) => {
+        e.preventDefault();
         try {
-            const result = await axios({
-                method: "POST",
-                url: "https://min-shop.herokuapp.com/rest/user/signUp",
-                data
-            });
-            
-            console.log(result.data);
+            await props.registerAccount(userRegister, history);
             
         } catch (error) {
             console.log(error.message);
@@ -95,4 +92,14 @@ function Register() {
     )
 }
 
-export default Register
+const mapStateToProps = (state) => {
+    return {
+        error: state.registerReducer.error
+    }
+}
+
+const mapDispatchToProps = {
+    registerAccount: registerAccountAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

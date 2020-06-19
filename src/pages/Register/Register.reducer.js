@@ -1,3 +1,6 @@
+import * as actionTypes from "./Register.action";
+import { act } from "react-dom/test-utils";
+
 const initState = {
     data: null,
     loading: false,
@@ -6,24 +9,24 @@ const initState = {
 
 function RegisterReducer(state = initState, action) {
     switch (action.type) {
-        case 'REGISTER_REQUEST':
+        case actionTypes.REGISTER_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case 'REGISTER_SUCCESS':
+        case actionTypes.REGISTER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                data: action.data
+                data: action.token
             }
 
-        case 'REGISTER_FAILURE':
+        case actionTypes.REGISTER_FAILURE:
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.err
             }
 
         default:
