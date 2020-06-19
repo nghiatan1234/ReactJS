@@ -20,7 +20,7 @@ export function loginFailAction(err) {
         err,
     };
 }
-export default function loginAccountAction(data) {
+export default function loginAccountAction(data, history) {
 
     return async (dispatch) => {
         dispatch(loginRequestAction());
@@ -31,9 +31,14 @@ export default function loginAccountAction(data) {
                 data,
             });
             localStorage.setItem("token", result.data.accessToken);
+            if (history.location.state && history.location.state.from.pathname) {
+                history.push(history.location.state.from.pathname);
+            } else {
+                history.push('/');
+            }
             dispatch(loginSuccessAction(result.data.accessToken));
         } catch (err) {
-            dispatch(loginFailAction(err));
+            dispatch(loginFailAction(err.response.data.message));
         }
     };
 }

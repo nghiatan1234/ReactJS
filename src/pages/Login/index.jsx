@@ -18,13 +18,9 @@ function Login(props) {
   const onSubmitLogin = async (e) => {
     e.preventDefault();
     try {
-      await props.loginAccount(valueLogin);
-      if (history.location.state.from.pathname) {
-        history.push(history.location.state.from.pathname);
-      }
-      window.location.reload();
-    } catch (err) {
-      console.log(err);
+      await props.loginAccount(valueLogin, history);
+    } catch (error) {
+      console.log(error);
     }
   };
   useEffect(() => {

@@ -1,3 +1,5 @@
+import * as actionTypes from "./Login.action";
+
 const initState = {
     data: null,
     loading: false,
@@ -6,20 +8,20 @@ const initState = {
 
 function LoginReducer(state = initState, action) {
     switch (action.type) {
-        case 'LOGIN_REQUEST':
+        case actionTypes.LOGIN_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case 'LOGIN_SUCCESS':
+        case actionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                data: action.data
+                data: action.token
             }
 
-        case 'LOGIN_FAILURE':
+        case actionTypes.LOGIN_FAIL:
             return {
                 ...state,
                 loading: false,
