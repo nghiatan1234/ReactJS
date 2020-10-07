@@ -4,12 +4,19 @@ function SideBar(props) {
 
   const [keyword, setKeyword] = useState();
   const onSortAsc = () => {
-    props.onSortAsc(props);
+    return props.onSortAsc(props);
+  }
+  const onSortDesc = () => {
+    return props.onSortDesc(props);
   }
 
-  const onSortDesc = () => {
-    props.onSortDesc(props);
-  }
+  const sortHighLow = () => {
+    return props.sortHighLow(props);
+  };
+
+  const sortLowHigh = () => {
+    return props.sortLowHigh(props);
+  };
 
   const onChangeKeyword = (event) => {
     setKeyword(event.target.value);
@@ -44,8 +51,8 @@ function SideBar(props) {
           <ul className="shop-link">
             <li><a style={{ cursor: 'pointer' }} onClick={onSortAsc}>Name: A-Z</a></li>
             <li><a style={{ cursor: 'pointer' }} onClick={onSortDesc}>Name: Z-A</a></li>
-            <li><a href="#">Price: High to Low</a></li>
-            <li><a href="#">Price: Low to High</a></li>
+            <li><a style={{cursor: 'pointer' }} onClick={sortHighLow}>NamePrice: High to Low</a></li>
+            <li><a style={{cursor: 'pointer' }} onClick={sortLowHigh}>Price: Low to High</a></li>
             <li><a href="#">Product: Top Sales</a></li>
           </ul>
         </div>

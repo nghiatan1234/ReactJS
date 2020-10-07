@@ -111,11 +111,13 @@ function Login(props) {
   );
 }
 
+// get data from state
 const mapStateToProps = (state) => {
   return {
     error: state.loginReducer.error,
   };
 };
+
 
 const mapDispatchToProps = {
   loginAccount: loginAccountAction,

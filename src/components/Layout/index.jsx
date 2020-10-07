@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function Layout(props) {
   return (
     <>
-    <header>
+      <header>
         <div id="header-sticky" className="header-area box-90 sticky-header">
           <div className="container-fluid">
             <div className="row align-items-center">
@@ -28,7 +28,7 @@ function Layout(props) {
               </div>
               <div className="col-xl-8 col-lg-6 col-md-8 col-8 d-none d-xl-block">
                 <div className="main-menu text-center">
-                  <nav id="mobile-menu" style={{display: 'block'}}>
+                  <nav id="mobile-menu" style={{ display: 'block' }}>
                     <ul>
                       <li>
                         <Link to="/">Home</Link>
@@ -37,13 +37,13 @@ function Layout(props) {
                         <a href="#">Pages</a>
                         <ul className="submenu">
                           <li>
-                            <a href="./detail.html">Product Detail</a>
+                            <Link to={`/product-detail`}>Product Detail</Link>
                           </li>
                           <li>
-                            <a href="./login.html">login</a>
+                            <Link to={`/login`}>Login</Link>
                           </li>
                           <li>
-                            <a href="./register.html">Register</a>
+                            <Link to={`/register`}>Register</Link>
                           </li>
                           <li>
                             <a href="./cart.html">Shoping Cart</a>
@@ -74,11 +74,11 @@ function Layout(props) {
           </div>
         </div>
       </header>
-    {/* Body */}
-    {props.children}
-    
-    <footer className="footer-area pl-100 pr-100">
-        <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{backgroundImage: 'url("img/bg/footer.jpg")'}}>
+      {/* Body */}
+      {props.children}
+
+      <footer className="footer-area pl-100 pr-100">
+        <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{ backgroundImage: 'url("img/bg/footer.jpg")' }}>
           <div className="container">
             <div className="row">
               <div className="col-xl-5 col-lg-6 col-md-6 ">
@@ -87,9 +87,9 @@ function Layout(props) {
                     <a href="#"><img src="/assets/logo_shop.png" alt="" /></a>
                   </div>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore mag na
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat.
+                  ut labore et dolore mag na
+                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                  ex ea commodo consequat.
                   </p>
                   <div className="footer-time d-flex mt-30">
                     <div className="time-icon">

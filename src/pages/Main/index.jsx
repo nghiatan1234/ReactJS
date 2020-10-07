@@ -45,13 +45,19 @@ function Main(props) {
 
   const sortPriceAsc = () => {
     const sortedProducts = [...products];
-    sortedProducts.sort((a, b) => a.price - b.price)
+    sortedProducts.sort((product1, product2) => {
+      return product1.name.toLowerCase().localeCompare(product2.name.toLowerCase());
+    });
     setProducts(sortedProducts);
   }
 
   const sortPriceDesc = () => {
     const sortedProducts = [...products];
-    sortedProducts.sort((a, b) => b.price - a.price)
+    sortedProducts.sort((product1, product2) => {
+      return product2.name
+        .toLowerCase()
+        .localeCompare(product1.name.toLowerCase());
+    });
     setProducts(sortedProducts);
   }
 
@@ -60,18 +66,29 @@ function Main(props) {
     setProductsInCart(itemToBeDeleted);
   }
 
+  const sortHighLow = () => {
+    let newProducts = [...products];
+    newProducts.sort((product1, product2) => product2.price - product1.price);
+
+    setProducts(newProducts);
+  }
+
+  const sortLowHigh = () => {
+    let newProducts = [...products];
+    newProducts.sort((product1, product2) => {
+      return product1.price - product2.price;
+    });
+
+    setProducts(newProducts);
+  }
+
   const onSearchProduct = (value) => {
-    const newProductSearch = [...dataProduct.data].filter(item => {
+    const productSearch = [...products];
+    const newProduct = productSearch.filter(item => {
       return item.name.includes(value);
     });
 
-    setProducts(newProductSearch);
-
-    if (newProductSearch.length > 0) {
-      setValue('blue');
-    } else {
-      setValue('red');
-    }
+    setProducts(newProduct);
   }
 
 
@@ -84,11 +101,12 @@ function Main(props) {
               <Content data={productsInCart}>
                 {
                   products.map(p => {
-                    return <ProductItem {...p} imageURL={p.image} onAdd={addProductsInCart} />
+                    return <ProductItem {...p} imageURL={p.imgUrl} onAdd={addProductsInCart} />
                   })
                 }
               </Content>
-              <SideBar onSortAsc={sortPriceAsc} onSortDesc={sortPriceDesc} onSearchProduct={onSearchProduct} />
+              <SideBar onSortAsc={sortPriceAsc} onSortDesc={sortPriceDesc} onSearchProduct={onSearchProduct}
+               sortHighLow={sortHighLow} sortLowHigh={sortLowHigh}/>
             </div>
           </div>
         </section>
