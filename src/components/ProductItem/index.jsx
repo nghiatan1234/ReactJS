@@ -13,9 +13,9 @@ function ProductItem(props) {
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">
                 <div className="product-img mb-25">
-                    <a href="!#">
+                    <Link to={`/product-detail/${props.id}`}>
                         <img src={props.imageURL} alt="" />
-                    </a>
+                    </Link>
                     <div className="product-action text-center">
                         <a href="!#" title="Shopping Cart" onClick={onAddToCart}>
                             <i className="fas fa-shopping-cart" />

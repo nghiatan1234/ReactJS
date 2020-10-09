@@ -2,6 +2,7 @@ import React from "react"
 
 
 function Content(props) {
+    console.log(props);
     return (
         <div className="col-xl-9 col-lg-8">
             {/* tab filter */}

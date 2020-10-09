@@ -98,7 +98,7 @@ function Main(props) {
         <section className="shop-area pt-150 pb-100">
           <div className="container">
             <div className="row">
-              <Content data={productsInCart}>
+              <Content count={products.length}>
                 {
                   products.map(p => {
                     return <ProductItem {...p} imageURL={p.imgUrl} onAdd={addProductsInCart} />
